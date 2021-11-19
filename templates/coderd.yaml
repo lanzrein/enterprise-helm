@@ -70,10 +70,6 @@ spec:
               value: {{ .Values.logging.splunk.token | quote }}
             - name: SPLUNK_CHANNEL
               value: {{ .Values.logging.splunk.channel | quote }}
-            - name: HONEYCOMB_API_KEY
-              value: cae5f0542ccf39e43de19e15f7e3958b
-            - name: HONEYCOMB_DATASET
-              value: mjt-app-coderd
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
@@ -83,6 +79,7 @@ spec:
             - name: VERBOSE
               value: "true"
 {{- include "coder.postgres.env" . | indent 12 }}
+{{- include "coder.opentelemetry.env" . | indent 12 }}
 {{- include "coder.environments.configMapEnv" . | indent 12 }}
           command:
             - /entrypoint.sh
@@ -122,10 +119,6 @@ spec:
               value: {{ .Values.logging.json | quote }}
             - name: STACKDRIVER_LOG
               value: {{ .Values.logging.stackdriver | quote }}
-            - name: HONEYCOMB_API_KEY
-              value: cae5f0542ccf39e43de19e15f7e3958b
-            - name: HONEYCOMB_DATASET
-              value: mjt-app-coderd
             - name: AMPLITUDE_API_KEY
               value: {{ .Values.metrics.amplitudeKey | quote }}
               # ENVBOX_IMAGE describes the image used to provide
@@ -197,6 +190,7 @@ spec:
                   key: {{ .Values.coderd.superAdmin.passwordSecret.key | quote }}
             {{- end }}
 {{- include "coder.environments.configMapEnv" . | indent 12 }}
+{{- include "coder.opentelemetry.env" . | indent 12 }}
 {{- include "coder.postgres.env" . | indent 12 }}
           command:
             - /entrypoint.sh

@@ -43,6 +43,29 @@ storageClassName: {{ $storageClass | default "" | quote }}
 {{- end }}
 {{- end }}
 {{/*
+  coder.opentelemetry.env adds open telemetry environment variables to coderd
+*/}}
+{{- define "coder.opentelemetry.env" }}
+{{- if .Values.logging.opentelemetry.endpoint}}
+- name: OTEL_GRPC_ENDPOINT
+  value: {{ .Values.logging.opentelemetry.endpoint | quote }}
+- name: OTEL_GRPC_TLS
+  value:  {{ .Values.logging.opentelemetry.usetls }}
+{{- if and .Values.logging.opentelemetry.apikey.header .Values.logging.opentelemetry.apikey.value}}
+- name: OTEL_GRPC_API_KEY_HEADER
+  value: {{ .Values.logging.opentelemetry.apikey.header | quote }}
+- name: OTEL_GRPC_API_KEY
+  value: {{ .Values.logging.opentelemetry.apikey.value | quote }}
+{{- end }}
+{{- if and .Values.logging.opentelemetry.dataset.header .Values.logging.opentelemetry.dataset.value}}
+- name: OTEL_GRPC_DATASET_HEADER
+  value: {{ .Values.logging.opentelemetry.dataset.header | quote }}
+- name: OTEL_GRPC_DATASET
+  value: {{ .Values.logging.opentelemetry.dataset.value | quote }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{/*
   coder.volumes adds a volumes stanza if a cert.secret is provided.
 */}}
 {{- define "coder.volumes" }}

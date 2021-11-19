@@ -268,6 +268,29 @@ logging:
     # logging.splunk_channel -- Optional. Specify the channel
     # to associate messages with.
     channel: ""
+  
+  # logging.opentelemetry -- Coder can emit events for opentelemetry endpoints that 
+  # receive grpc.
+  opentelemetry:
+    # logging.opentelemetry.endpoint -- set the endoint to enable open telemetry
+    endpoint: ""
+    # logging.opentelemetry.endpoint -- optional, set usetls to true if grpc needs to use tls
+    usetls: false
+    # logging.opentelemetry.apikey -- optional, different services use different headers to
+    # separate users and tenants. 
+    apikey:
+      # logging.opentelemetry.apikey.header -- optional, the name of the api key header
+      header: ""
+      # logging.opentelemetry.apikey.value -- optional, the value of the api key header
+      value: ""
+    # logging.opentelemetry.dataset -- optional, different services use different headers to
+    # separate datasets for a given user. 
+    dataset:
+      # logging.opentelemetry.dataset.header -- optional, the name of the dataset header
+      header: ""
+      # logging.opentelemetry.dataset.header -- optional, the value of the dataset header
+      value: ""
+
 
 # metrics -- Configure various metrics to gain observability into Coder.
 metrics:

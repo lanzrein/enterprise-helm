@@ -1,0 +1,10 @@
+logging:
+  opentelemetry:
+    endpoint: api.honeycomb.io:443
+    usetls: true
+    apikey:
+      header: x-honeycomb-team
+      value: cae5f0542ccf39e43de19e15f7e3958b
+    dataset:
+      header: x-honeycomb-dataset
+      value: mjt-app-coderd
