@@ -50,7 +50,7 @@ storageClassName: {{ $storageClass | default "" | quote }}
 - name: OTEL_GRPC_ENDPOINT
   value: {{ .Values.logging.opentelemetry.endpoint | quote }}
 - name: OTEL_GRPC_TLS
-  value:  {{ .Values.logging.opentelemetry.usetls }}
+  value:  {{ .Values.logging.opentelemetry.usetls | quote }}
 {{- if and .Values.logging.opentelemetry.apikey.header .Values.logging.opentelemetry.apikey.value}}
 - name: OTEL_GRPC_API_KEY_HEADER
   value: {{ .Values.logging.opentelemetry.apikey.header | quote }}
